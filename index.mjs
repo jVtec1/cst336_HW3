@@ -26,8 +26,15 @@ let eUrl = "https://rickandmortyapi.com/api/episode";
 let eResponse = await fetch(eUrl);
 let eData = await eResponse.json();
 
-app.get('/', (req, res) => {  
-    res.render('home');
+app.get('/', async(req, res) => {  
+    let rand = Math.floor(Math.random() * cData.info.count);
+    let url2 = "https://rickandmortyapi.com/api/character/" + rand;
+    let response2 = await fetch(url2);
+    let data2 = await response2.json();
+    res.render('home', 
+      {
+      chars:data2
+    });
 });
 
 app.get('/characters', async(req, res) => {  
@@ -36,7 +43,7 @@ app.get('/characters', async(req, res) => {
   let response2 = await fetch(url2);
   let data2 = await response2.json();
 
-  console.log(data2);
+  // console.log(data2);
   res.render('characters',
     {
       chars:data2
@@ -49,7 +56,7 @@ app.get('/customChar', async(req, res) => {
   let response2 = await fetch(url2);
   let data2 = await response2.json();
 
-  console.log(data2);
+  // console.log(data2);
   res.render('characters',
     {
       chars:data2
@@ -62,7 +69,7 @@ app.get('/locations', async(req, res) => {
   let response2 = await fetch(url2);
   let data2 = await response2.json();
 
-  console.log(data2);
+  // console.log(data2);
   res.render('locations',
     {
       locs:data2
@@ -75,7 +82,7 @@ app.get('/episodes', async(req, res) => {
   let response2 = await fetch(url2);
   let data2 = await response2.json();
 
-  console.log(data2);
+  // console.log(data2);
   res.render('episodes',
       {
         eps:data2
